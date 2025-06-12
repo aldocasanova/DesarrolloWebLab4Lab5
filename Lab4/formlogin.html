@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <h2>Iniciar Sesión</h2>
+  <form id="loginForm">
+    <input type="email" name="correo" placeholder="Correo" required><br>
+    <input type="password" name="password" placeholder="Contraseña" required><br>
+    <button type="submit">Ingresar</button>
+  </form>
+  <div id="mensaje"></div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function() {
+      event.preventDefault();
+      const datos = new FormData(this);
+
+      fetch("autenticar.php", {
+        method: "POST",
+        body: datos
+      })
+      .then(res => res.text())
+      .then(respuesta => {
+        if (respuesta === "admin") {
+          this.action = "admin.php";
+          this.submit();
+        } else if (respuesta === "usuario") {
+          this.action = "usuario.php";
+          this.submit();
+        } else {
+          document.getElementById("mensaje").innerText = respuesta;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

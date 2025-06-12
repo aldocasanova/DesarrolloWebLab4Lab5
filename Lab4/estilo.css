@@ -1,0 +1,82 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 40px;
+  background-color: #f5f8fa;
+}
+
+h2, h3 {
+  color: #003366;
+  margin-top: 25px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+th {
+  background-color: #cce0ff;
+  color: #003366;
+}
+
+th, td {
+  border: 1px solid #003366;
+  padding: 6px 10px;
+  text-align: left;
+}
+
+input, textarea, select {
+  margin: 4px 0;
+  padding: 6px;
+  font-size: 13px;
+  width: 95%;
+  border: 1px solid #003366;
+  border-radius: 4px;
+}
+
+button {
+  padding: 6px 10px;
+  font-size: 13px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+form {
+  background-color: #ffffff;
+  padding: 15px;
+  border: 1px solid #003366;
+  border-radius: 6px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  max-width: 1000px; /* como Gmail: más largo horizontalmente */
+}
+
+#modalVer, #modalRedactar {
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  border: 1px solid #003366;
+  background-color: white;
+  padding: 20px;
+  width: 70%;
+  max-width: 900px;
+}
+
+#modalRedactar input,
+#modalRedactar textarea {
+  width: 100%;
+}
+
+#mensaje, #respuesta, #respuestaAviso, #respuestaRedactar {
+  margin-top: 10px;
+  color: #d60000;
+  font-weight: bold;
+}
