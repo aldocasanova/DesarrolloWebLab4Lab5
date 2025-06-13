@@ -1,3 +1,4 @@
+// Redactar correo: detectar botón (Guardar o Enviar) y procesar envío
 document.querySelectorAll("#formRedactar button[name='accion']").forEach(btn => {
   btn.addEventListener("click", function() {
     const datos = new FormData(document.getElementById("formRedactar"));
@@ -11,19 +12,21 @@ document.querySelectorAll("#formRedactar button[name='accion']").forEach(btn => 
     .then(msg => {
       document.getElementById("respuestaRedactar").innerText = msg;
       cargarBorradores();
-      cargarSalida();
+      //cargarSalida();
       cerrarModalRedactar();
     });
   });
 });
 
-// bandejas
+// Bandejas
 function cargarEntrada() {
   fetch("bandeja_entrada.php", {
     method: "POST"
   })
   .then(res => res.text())
-  .then(data => document.getElementById("tablaEntrada").innerHTML = data);
+  .then(data => {
+    document.querySelector("#TTable").innerHTML="Bandeja de Entrada";
+    document.getElementById("tablaBorradores").innerHTML = data});
 }
 
 function cargarSalida() {
@@ -31,7 +34,9 @@ function cargarSalida() {
     method: "POST"
   })
   .then(res => res.text())
-  .then(data => document.getElementById("tablaSalida").innerHTML = data);
+  .then(data => {
+    document.querySelector("#TTable").innerHTML="Bandeja de Salida";
+    document.getElementById("tablaBorradores").innerHTML = data});
 }
 
 function cargarBorradores() {
@@ -39,10 +44,12 @@ function cargarBorradores() {
     method: "POST"
   })
   .then(res => res.text())
-  .then(data => document.getElementById("tablaBorradores").innerHTML = data);
+  .then(data => {
+    document.querySelector("#TTable").innerHTML="Bandeja de Borradores";
+    document.getElementById("tablaBorradores").innerHTML = data});
 }
 
-// ver correo (modal)
+// Ver correo (modal)
 function verCorreo(id) {
   const datos = new FormData();
   datos.append("id", id);
@@ -56,8 +63,8 @@ function verCorreo(id) {
     document.getElementById("modalContenido").innerHTML =
       `<h4>Asunto: ${correo.asunto}</h4><p>${correo.cuerpo}</p>`;
     document.getElementById("modalVer").style.display = "block";
-    cargarEntrada();
-    cargarSalida();
+    //cargarEntrada();
+    //cargarSalida();
   });
 }
 
@@ -71,9 +78,19 @@ function eliminarCorreo(id) {
     body: datos
   })
   .then(() => {
-    cargarEntrada();
-    cargarSalida();
-    cargarBorradores();
+    
+    if (document.querySelector("#TTable").textContent === "Bandeja de Salida") {
+      cargarSalida();
+    }
+    if (document.querySelector("#TTable").textContent === "Bandeja de Entrada") {
+      cargarEntrada();
+    }
+    if (document.querySelector("#TTable").textContent === "Bandeja de Borradores") {
+      cargarBorradores();
+    }
+    //cargarEntrada();
+    //cargarSalida();
+    //cargarBorradores();
   });
 }
 
@@ -87,12 +104,12 @@ function enviarBorrador(id) {
     body: datos
   })
   .then(() => {
-    cargarSalida();
+    //cargarSalida();
     cargarBorradores();
   });
 }
 
-// modal redactar
+// Control del modal redactar
 function abrirModalRedactar() {
   document.getElementById("modalRedactar").style.display = "block";
 }
@@ -106,9 +123,16 @@ function cerrarModal() {
 }
 
 
-// cargar bandejas al cargar la página
+// Cargar todo al iniciar
 window.onload = function() {
-  cargarEntrada();
+  //cargarEntrada();
   cargarSalida();
-  cargarBorradores();
+  //cargarBorradores();
 };
+
+function cerrarSesion() {
+  fetch("cerrar.php", { method: "POST" })
+    .then(() => {
+      window.location.href = "formlogin.html";
+    });
+}

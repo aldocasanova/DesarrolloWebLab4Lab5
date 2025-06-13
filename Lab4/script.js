@@ -73,3 +73,10 @@ window.onload = function() {
   cargarUsuarios();
   cargarCorreos();
 };
+
+function cerrarSesion() {
+  fetch("cerrar.php", { method: "POST" })
+    .then(() => {
+      window.location.href = "formlogin.html";
+    });
+}

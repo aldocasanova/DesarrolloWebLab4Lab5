@@ -9,6 +9,7 @@
 <body>
   <h2>Panel de Administración</h2>
 
+  <h3>Introducir Usuarios</h3>
   <?php include("forminsertar_usuario.php"); ?>
 
   <h3>Listado de Usuarios</h3>
@@ -29,6 +30,8 @@
 
   <h3>Enviar aviso a todos</h3>
   <?php include("form_aviso.php"); ?>
+
+  <a class="cerrar" href="javascript:cerrarSesion()">Cerrar Sesion</a>
 
   <script src="script.js"></script>
 </body>

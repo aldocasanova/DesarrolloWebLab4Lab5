@@ -15,8 +15,8 @@
   <div id="mensaje"></div>
 
   <script>
-    document.getElementById("loginForm").addEventListener("submit", function() {
-      event.preventDefault();
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
       const datos = new FormData(this);
 
       fetch("autenticar.php", {
